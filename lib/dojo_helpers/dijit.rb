@@ -61,7 +61,9 @@ module DojoHelpers
             'tag' => 'div'
           })
 
-        html_options['jsId'] = html_options['id'].camelcase(:lower) if options['global']
+        if options['global'] && html_options['id']
+          html_options['jsId'] = html_options['id'].camelcase(:lower)
+        end
       end
 
       def form_options(html_options = {}, options = {})
