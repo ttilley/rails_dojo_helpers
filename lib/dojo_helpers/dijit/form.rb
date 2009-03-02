@@ -73,6 +73,13 @@ module DojoHelpers
         html_options['type'] ||= 'reset'
         dijit_button(content, html_options, options)
       end
+      
+      def dijit_button_to(name, url_options={}, html_options={}, options={})
+        url = url_options.is_a?(String) ? url_options : self.url_for(url_options)
+        html_options['onClick'] = "window.location = '#{url}';"
+        name = url if name.blank?
+        dijit_button(name, html_options, options)
+      end
     end
   end
 end
