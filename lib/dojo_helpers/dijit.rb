@@ -31,6 +31,13 @@ module DojoHelpers
               'executeScripts' => true
             })
         end
+        
+        if options['smoothScroll']
+          duration = options['duration'] || 1000
+          smoothScroll = "dojox.fx.smoothScroll({node:this.domNode,win:dojo.global,duration:#{duration}}).play();"
+          default = "return this.loadingMessage;"
+          html_options['onDownloadStart'] = "#{smoothScroll}#{default}"
+        end
       end
 
       dijit_content = content_tag(options['tag'], content, html_options)
