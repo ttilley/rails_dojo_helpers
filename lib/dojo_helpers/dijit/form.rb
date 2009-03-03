@@ -80,6 +80,31 @@ module DojoHelpers
         name = url if name.blank?
         dijit_button(name, html_options, options)
       end
+      
+      def dijit_toolbar(content_or_html_options_with_block = nil, html_options_or_options_with_block = {}, options = {}, &block)        
+        if block_given?
+          html_options = content_or_html_options_with_block if content_or_html_options_with_block.is_a?(Hash)
+          options = html_options_or_options_with_block
+          content = capture(&block)
+        else
+          content = content_or_html_options_with_block
+          html_options = html_options_or_options_with_block
+        end
+        
+        html_options['dojoType'] ||= 'dijit.Toolbar'
+        dijit_content = dijit_content(content, html_options, options)
+
+        if block_given? && block_is_within_action_view?(block)
+          concat(dijit_content, block.binding)
+        else
+          dijit_content
+        end
+      end
+      
+      def dijit_toolbar_separator(html_options={}, options={})
+        html_options['dojoType'] ||= 'dijit.ToolbarSeparator'
+        dijit_content('', html_options, options)
+      end
     end
   end
 end
