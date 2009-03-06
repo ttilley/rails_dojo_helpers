@@ -22,11 +22,11 @@ module DojoHelpers
             'refreshOnShow' => false
           })
 
-        unless not options['dojox_content_pane']
+        unless options['dojox_content_pane'] == false
           html_options['dojoType'] = 'dojox.layout.ContentPane'
           html_options.reverse_merge!({
               'adjustPaths' => false,
-              'cleanContent' => false,
+              'cleanContent' => true,
               'renderStyles' => true,
               'executeScripts' => true
             })
