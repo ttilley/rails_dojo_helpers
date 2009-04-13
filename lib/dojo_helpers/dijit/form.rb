@@ -11,6 +11,12 @@ module DojoHelpers
         ::DojoHelpers::Dijit.textbox_options(html_options, method)
         text_field(object_name, method, html_options)
       end
+      
+      def dijit_text_field_tag(name, value = nil, html_options = {})
+        html_options['title'] ||= name
+        ::DojoHelpers::Dijit.textbox_options(html_options, name)
+        text_field_tag(name, value, html_options)
+      end
 
       def dijit_password_field(object_name, method, html_options = {})
         ::DojoHelpers::Dijit.textbox_options(html_options, method)
